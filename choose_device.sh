@@ -1,11 +1,16 @@
 #!/bin/zsh
 
 __get_available_devices() {
-	adb_output="$(adb devices | tail -n +2)"
+	adb_devices=$(adb devices 2>/dev/null)
+	if [[ "$?" -ne 0 ]]; then
+		echo ""
+	else
+		adb_output="$(adb devices | tail -n +2)"
 
-	while IFS= read -r adb_line; do
-		echo "$adb_line" | cut -f1
-	done <<< "$adb_output"
+		while IFS= read -r adb_line; do
+			echo "$adb_line" | cut -f1
+		done <<< "$adb_output"
+	fi
 }
 
 __get_device_model() {
