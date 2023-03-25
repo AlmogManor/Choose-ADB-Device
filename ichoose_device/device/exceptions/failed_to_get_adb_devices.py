@@ -1,0 +1,2 @@
+class FailedToGetAdbDevices(Exception):
+	pass
