@@ -14,7 +14,7 @@ def __make_prompt(device: AdbDevice) -> str:
 
     model = ColoredText(f" {device.model}", "#39a4c6")
     manufacturer = ColoredText(f"󰈏 {device.manufacturer}", "#909090")
-    android_version = ColoredText(f" {str(device.android_version)}", "#a4c639")
+    android_version = ColoredText(f" {device.android_version}", "#a4c639")
     serial = ColoredText(f"󰁲  {device.serial}", "#cccccc")
     adb_identifier = ColoredText(f" {device.adb_identifier}", "#ff6262")
 
@@ -35,8 +35,9 @@ def main():
     choice = inquirer.prompt(options)
 
     if choice:
-        with open("/tmp/ichoose-device-serial-file", "w+") as output:
-            output.write(choice["device"].split(" ")[-1])
+        with open("/tmp/ichoose-device-serial-file", "w+", encoding="ascii") as output:
+            # remove the colour formatting from the end
+            output.write(choice["device"].split(" ")[-1][:-4])
 
 
 if __name__ == "__main__":
