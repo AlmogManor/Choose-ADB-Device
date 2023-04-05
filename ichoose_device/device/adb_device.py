@@ -9,7 +9,7 @@ from .adb_device_connection_type import AdbDeviceConnectionType
 @dataclass
 class AdbDevice:
     model: str
-    android_version: int
+    android_version: str
     manufacturer: str
     serial: str
     adb_identifier: str
@@ -19,7 +19,7 @@ class AdbDevice:
     def from_adb_identifier(adb_iderntifier: str) -> AdbDevice:
         return AdbDevice(
             model=AdbCommandRunner.getprop("ro.product.model", adb_iderntifier).strip(),
-            android_version=int(AdbCommandRunner.getprop("ro.build.version.release", adb_iderntifier)),
+            android_version=AdbCommandRunner.getprop("ro.build.version.release", adb_iderntifier).strip(),
             manufacturer=AdbCommandRunner.getprop("ro.product.manufacturer", adb_iderntifier).strip(),
             serial=AdbCommandRunner.getprop("ro.serialno", adb_iderntifier).strip(),
             adb_identifier=adb_iderntifier.strip(),
