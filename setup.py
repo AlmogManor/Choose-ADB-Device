@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ichoose-device',
-    version="1.0.0",
+    version="1.0.1",
     description="Interactivly choose which adb device you want to work with in the current shell session",
     author="Almog Manor",
     author_email="ManorAlmog@outlook.com",
